@@ -1,7 +1,7 @@
 // Guarded PWA service worker registration.
 // Never registers in dev, inside an iframe, or when ?sw=off is present.
 
-const SW_URL = "/sw.js";
+const SW_URL = `${import.meta.env.BASE_URL}sw.js`;
 
 function shouldSkip(): boolean {
   if (!import.meta.env.PROD) return true;

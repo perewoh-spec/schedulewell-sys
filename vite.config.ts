@@ -5,6 +5,8 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
+  // Served from a sub-folder on GitHub Pages (BASE_PATH=/<repo>/); "/" everywhere else.
+  base: process.env.BASE_PATH || "/",
   server: {
     host: "::",
     port: 8080,
@@ -22,7 +24,7 @@ export default defineConfig(() => ({
       manifest: false,
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest,woff2}"],
-        navigateFallback: "/index.html",
+        navigateFallback: `${process.env.BASE_PATH || "/"}index.html`,
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {

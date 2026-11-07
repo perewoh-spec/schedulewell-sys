@@ -28,7 +28,7 @@ export default function Auth() {
     try {
       if (forgot) {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/reset-password`,
+          redirectTo: `${window.location.origin}${import.meta.env.BASE_URL}reset-password`,
         });
         if (error) throw error;
         toast({ title: "Check your email", description: "We sent you a link to reset your password." });
@@ -41,7 +41,7 @@ export default function Auth() {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { data: { full_name: fullName }, emailRedirectTo: window.location.origin },
+          options: { data: { full_name: fullName }, emailRedirectTo: `${window.location.origin}${import.meta.env.BASE_URL}` },
         });
         if (error) throw error;
         toast({ title: "Account created!", description: "Check your email to confirm your account, then sign in." });
